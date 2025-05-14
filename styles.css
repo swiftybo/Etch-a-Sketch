@@ -1,17 +1,28 @@
 h1 {
     color: red;
+    text-align: center;
+}
+
+.game-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 
 .grid-container {
     height: 640px;
     width: 640px;
-    margin-right: auto;
-    margin-left: auto;
     outline: solid black;
+    display: flex;
+    flex-wrap: wrap;
 }
 
 .grid-div {
-    height: 40px;
-    width: 40px;
-    outline: solid blueviolet;
+    outline: solid blue;
+    outline-width: 0.5px;
+}
+
+.grid-div:hover {
+    background-color: pink;
 }
