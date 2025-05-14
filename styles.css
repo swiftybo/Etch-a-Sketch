@@ -1,0 +1,17 @@
+h1 {
+    color: red;
+}
+
+.grid-container {
+    height: 640px;
+    width: 640px;
+    margin-right: auto;
+    margin-left: auto;
+    outline: solid black;
+}
+
+.grid-div {
+    height: 40px;
+    width: 40px;
+    outline: solid blueviolet;
+}
