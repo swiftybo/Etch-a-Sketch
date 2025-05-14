@@ -31,9 +31,12 @@ function createGridDiv(dimension) {
     // This is a local gridDiv variable (not accessible out of function, therefore there is a global variable for all gridDivs)
     const gridDiv = document.createElement("div");
     gridDiv.classList.add("grid-div");
-    gridDiv.classList.add(".grid-div-default:hover");
+    // gridDiv.classList.add(".grid-div-default:hover");
     gridDiv.style.width = dimension;
     gridDiv.style.height = dimension;
+    gridDiv.addEventListener("mouseover", function () {
+        gridDiv.style.backgroundColor = "pink";
+    });
     gridContainer.appendChild(gridDiv);
 }
 
