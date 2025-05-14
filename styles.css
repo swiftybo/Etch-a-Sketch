@@ -27,6 +27,12 @@ h1 {
     outline-width: 0.5px;
 }
 
-.grid-div:hover {
+.grid-div-default:hover {
     background-color: pink;
+}
+
+.penColourButton {
+    width: 28px;
+    height: 28px;
+    outline: solid black;
 }

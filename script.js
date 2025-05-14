@@ -4,12 +4,15 @@ const gridContainer = document.querySelector(".grid-container");
 const gameSection = document.querySelector(".game-section");
 const gridDiv = document.querySelectorAll(".grid-div");
 const resizeButton = document.querySelector(".button");
+const colourContainer = document.querySelector(".colour-container");
 
 const defaultNumOfSquares = 16;
 const defaultTotalSquares = defaultNumOfSquares * defaultNumOfSquares;
 let dimensions = getDimensions(defaultNumOfSquares);
 createGameGrid(defaultTotalSquares, dimensions);
 createResizeButton();
+createColourContainer();
+createPenColourButton("red");
 
 // Function to create the entire game grid:
 function createGameGrid(totalsquares, measurements) {
@@ -28,7 +31,7 @@ function createGridDiv(dimension) {
     // This is a local gridDiv variable (not accessible out of function, therefore there is a global variable for all gridDivs)
     const gridDiv = document.createElement("div");
     gridDiv.classList.add("grid-div");
-    gridDiv.classList.add(".grid-div:hover");
+    gridDiv.classList.add(".grid-div-default:hover");
     gridDiv.style.width = dimension;
     gridDiv.style.height = dimension;
     gridContainer.appendChild(gridDiv);
@@ -77,10 +80,22 @@ function resizeGrid() {
 function createColourContainer() {
     const colourContainer = document.createElement("div");
     colourContainer.classList.add("colour-container");
-    colourContainer.style.margin = "20px";
+    colourContainer.style.margin = "30px 0px 15px 0px";
+    colourContainer.style.display = "flex";
+    colourContainer.style.justifyContent = "center";
     colourContainer.textContent =
         "This is the colour section! Choose your colour of pen.";
+    colourContainer.style.fontSize = "18px";
     gameSection.appendChild(colourContainer);
 }
 
-createColourContainer();
+function createPenColourButton(colour) {
+    const penColourButton = document.createElement("div");
+    penColourButton.classList.add("penColourButton");
+    penColourButton.style.backgroundColor = colour;
+    gameSection.appendChild(penColourButton);
+
+    penColourButton.addEventListener("click", function () {
+        console.log(`You picked the colour ${colour}`);
+    });
+}
