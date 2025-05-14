@@ -5,12 +5,21 @@ const gameSection = document.querySelector(".game-section");
 const gridDiv = document.querySelectorAll(".grid-div");
 const resizeButton = document.querySelector(".button");
 
-const numOfSquares = 8;
-const totalSquares = numOfSquares * numOfSquares;
-let dimensions = String(getDimensions(numOfSquares)) + "px";
+const defaultNumOfSquares = 16;
+const defaultTotalSquares = defaultNumOfSquares * defaultNumOfSquares;
+let dimensions = getDimensions(defaultNumOfSquares);
+createGameGrid(defaultTotalSquares, dimensions);
 
+// Function to create the entire game grid:
+function createGameGrid(totalsquares, measurements) {
+    for (let i = 0; i < totalsquares; i++) {
+        createGridDiv(measurements);
+    }
+}
+
+// Function for getting dimensions of grid square (returned as a string in pixels):
 function getDimensions(numOfSquares) {
-    return 640 / numOfSquares;
+    return String(640 / numOfSquares) + "px";
 }
 
 // Function for creating the grid div:
@@ -24,6 +33,7 @@ function createGridDiv(dimension) {
     gridContainer.appendChild(gridDiv);
 }
 
+// Function for creating resize button in DOM & assigning classes & event listener:
 function createResizeButton() {
     const resizeButton = document.createElement("button");
     resizeButton.classList.add("button");
@@ -32,11 +42,15 @@ function createResizeButton() {
     resizeButton.style.padding = "10px, 30px";
     resizeButton.style.fontSize = "20px";
     gameSection.insertBefore(resizeButton, gridContainer);
+    resizeButton.addEventListener("click", resizeGrid);
 }
 
-// Loop to create the entire game grid:
-for (let i = 0; i < totalSquares; i++) {
-    createGridDiv(dimensions);
+function resizeGrid() {
+    const newNumOfSquares = prompt(
+        "How many squares would you like along the sides?"
+    );
+    const newTotalSquares = newNumOfSquares * newNumOfSquares;
+    const newDimensions = getDimensions(newNumOfSquares);
 }
 
 createResizeButton();
