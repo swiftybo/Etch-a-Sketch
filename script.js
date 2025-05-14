@@ -49,8 +49,18 @@ function resizeGrid() {
     const newNumOfSquares = prompt(
         "How many squares would you like along the sides?"
     );
-    const newTotalSquares = newNumOfSquares * newNumOfSquares;
-    const newDimensions = getDimensions(newNumOfSquares);
+    if (newNumOfSquares >= 100) {
+        alert(
+            "It is not recommended to have more than 100 squares across each side of the grid. Please try again and enter a lower number of sqaures."
+        );
+        return;
+    } else {
+        gridContainer.innerHTML = "";
+    }
+
+    // const newTotalSquares = newNumOfSquares * newNumOfSquares;
+    // const newDimensions = getDimensions(newNumOfSquares);
+    // createGameGrid(newTotalSquares, newDimensions);
 }
 
 createResizeButton();
