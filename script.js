@@ -9,6 +9,7 @@ const defaultNumOfSquares = 16;
 const defaultTotalSquares = defaultNumOfSquares * defaultNumOfSquares;
 let dimensions = getDimensions(defaultNumOfSquares);
 createGameGrid(defaultTotalSquares, dimensions);
+createResizeButton();
 
 // Function to create the entire game grid:
 function createGameGrid(totalsquares, measurements) {
@@ -40,6 +41,7 @@ function createResizeButton() {
     resizeButton.textContent = "Resize Grid";
     resizeButton.style.marginBottom = "30px";
     resizeButton.style.padding = "10px, 30px";
+    resizeButton.style.color = "navy";
     resizeButton.style.fontSize = "20px";
     gameSection.insertBefore(resizeButton, gridContainer);
     resizeButton.addEventListener("click", resizeGrid);
@@ -72,4 +74,13 @@ function resizeGrid() {
     }
 }
 
-createResizeButton();
+function createColourContainer() {
+    const colourContainer = document.createElement("div");
+    colourContainer.classList.add("colour-container");
+    colourContainer.style.margin = "20px";
+    colourContainer.textContent =
+        "This is the colour section! Choose your colour of pen.";
+    gameSection.appendChild(colourContainer);
+}
+
+createColourContainer();

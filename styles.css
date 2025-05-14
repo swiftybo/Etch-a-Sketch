@@ -1,5 +1,9 @@
+/* body {
+    background: linear-gradient(to left, #fdefb2, #f9e076);
+} */
+
 h1 {
-    color: red;
+    color: navy;
     text-align: center;
 }
 
@@ -13,13 +17,13 @@ h1 {
 .grid-container {
     height: 640px;
     width: 640px;
-    outline: solid black;
+    outline: solid lightskyblue;
     display: flex;
     flex-wrap: wrap;
 }
 
 .grid-div {
-    outline: solid blue;
+    outline: solid lightskyblue;
     outline-width: 0.5px;
 }
 
