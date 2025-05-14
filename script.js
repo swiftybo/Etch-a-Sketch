@@ -51,16 +51,25 @@ function resizeGrid() {
     );
     if (newNumOfSquares >= 100) {
         alert(
-            "It is not recommended to have more than 100 squares across each side of the grid. Please try again and enter a lower number of sqaures."
+            "It is not recommended to have more than 100 squares across each side of the grid. Please try again and enter a lower number of squares."
+        );
+        return;
+    } else if (newNumOfSquares < 4) {
+        alert(
+            "It is recommended to have at least 4 squares across each side of the grid. Please try again and enter a higher number of squares."
+        );
+        return;
+    } else if (newNumOfSquares < 0) {
+        alert(
+            "It is impossible to create a grid with less than 0 squares. Please try again and enter a higher number of squares (between 4 - 100)."
         );
         return;
     } else {
         gridContainer.innerHTML = "";
+        const newTotalSquares = newNumOfSquares * newNumOfSquares;
+        const newDimensions = getDimensions(newNumOfSquares);
+        createGameGrid(newTotalSquares, newDimensions);
     }
-
-    // const newTotalSquares = newNumOfSquares * newNumOfSquares;
-    // const newDimensions = getDimensions(newNumOfSquares);
-    // createGameGrid(newTotalSquares, newDimensions);
 }
 
 createResizeButton();
