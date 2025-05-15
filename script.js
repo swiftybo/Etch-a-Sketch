@@ -3,23 +3,30 @@
 const gridContainer = document.querySelector(".grid-container");
 const gameSection = document.querySelector(".game-section");
 const gridDiv = document.querySelectorAll(".grid-div");
-const resizeButton = document.querySelector(".button");
-const colourContainer = document.querySelector(".colour-container");
+const resizeButton = createResizeButton();
+const colourContainer = createColourContainer();
+const redPenButton = createPenColourButton("red");
+const bluePenButton = createPenColourButton("lightblue");
+const yellowPenButton = createPenColourButton("yellow");
+const greenPenButton = createPenColourButton("lightgreen");
+
+colourContainer.appendChild(redPenButton);
+colourContainer.appendChild(bluePenButton);
+colourContainer.appendChild(yellowPenButton);
+colourContainer.appendChild(greenPenButton);
+
+const defaultPenColour = "red";
+let currentColour = defaultPenColour;
 
 const defaultNumOfSquares = 16;
-const defaultTotalSquares = defaultNumOfSquares * defaultNumOfSquares;
-let dimensions = getDimensions(defaultNumOfSquares);
-createGameGrid(defaultTotalSquares, dimensions);
-createResizeButton();
-createColourContainer();
-createPenColourButton("red");
+let currentTotalSquares = defaultNumOfSquares * defaultNumOfSquares;
+let currentDimensions = getDimensions(defaultNumOfSquares);
+createGameGrid(currentTotalSquares, currentDimensions, currentColour);
 
-// Function to create the entire game grid:
-function createGameGrid(totalsquares, measurements) {
-    for (let i = 0; i < totalsquares; i++) {
-        createGridDiv(measurements);
-    }
-}
+const colour_statement = document.createElement("p");
+colour_statement.textContent =
+    "This is the colour section! Change your pen colour below ⬇️";
+gameSection.insertBefore(colour_statement, colourContainer);
 
 // Function for getting dimensions of grid square (returned as a string in pixels):
 function getDimensions(numOfSquares) {
@@ -27,7 +34,7 @@ function getDimensions(numOfSquares) {
 }
 
 // Function for creating the grid div:
-function createGridDiv(dimension) {
+function createGridDiv(dimension, colour) {
     // This is a local gridDiv variable (not accessible out of function, therefore there is a global variable for all gridDivs)
     const gridDiv = document.createElement("div");
     gridDiv.classList.add("grid-div");
@@ -35,22 +42,30 @@ function createGridDiv(dimension) {
     gridDiv.style.width = dimension;
     gridDiv.style.height = dimension;
     gridDiv.addEventListener("mouseover", function () {
-        gridDiv.style.backgroundColor = "pink";
+        gridDiv.style.backgroundColor = colour;
     });
     gridContainer.appendChild(gridDiv);
 }
 
+// Function to create the entire game grid:
+function createGameGrid(totalsquares, measurements, penColour) {
+    for (let i = 0; i < totalsquares; i++) {
+        createGridDiv(measurements, penColour);
+    }
+}
+
 // Function for creating resize button in DOM & assigning classes & event listener:
 function createResizeButton() {
-    const resizeButton = document.createElement("button");
+    let resizeButton = document.createElement("button");
     resizeButton.classList.add("button");
     resizeButton.textContent = "Resize Grid";
     resizeButton.style.marginBottom = "30px";
     resizeButton.style.padding = "10px, 30px";
     resizeButton.style.color = "navy";
     resizeButton.style.fontSize = "20px";
-    gameSection.insertBefore(resizeButton, gridContainer);
     resizeButton.addEventListener("click", resizeGrid);
+    gameSection.insertBefore(resizeButton, gridContainer);
+    return resizeButton;
 }
 
 function resizeGrid() {
@@ -74,31 +89,33 @@ function resizeGrid() {
         return;
     } else {
         gridContainer.innerHTML = "";
-        const newTotalSquares = newNumOfSquares * newNumOfSquares;
-        const newDimensions = getDimensions(newNumOfSquares);
-        createGameGrid(newTotalSquares, newDimensions);
+        currentTotalSquares = newNumOfSquares * newNumOfSquares;
+        currentDimensions = getDimensions(newNumOfSquares);
+        createGameGrid(currentTotalSquares, currentDimensions, currentColour);
     }
 }
 
 function createColourContainer() {
     const colourContainer = document.createElement("div");
     colourContainer.classList.add("colour-container");
-    colourContainer.style.margin = "30px 0px 15px 0px";
+    colourContainer.style.margin = "15px";
     colourContainer.style.display = "flex";
     colourContainer.style.justifyContent = "center";
-    colourContainer.textContent =
-        "This is the colour section! Choose your colour of pen.";
+    colourContainer.style.alignItems = "center";
     colourContainer.style.fontSize = "18px";
     gameSection.appendChild(colourContainer);
+    return colourContainer;
 }
 
 function createPenColourButton(colour) {
     const penColourButton = document.createElement("div");
     penColourButton.classList.add("penColourButton");
+    penColourButton.setAttribute("id", `${colour}`);
     penColourButton.style.backgroundColor = colour;
-    gameSection.appendChild(penColourButton);
+    penColourButton.style.margin = "8px";
+    return penColourButton;
+}
 
-    penColourButton.addEventListener("click", function () {
-        console.log(`You picked the colour ${colour}`);
-    });
+function showRed() {
+    gridDiv.style.backgroundColor = "red";
 }
