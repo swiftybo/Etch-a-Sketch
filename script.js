@@ -5,7 +5,12 @@ const gameSection = document.querySelector(".game-section");
 const gridDiv = document.querySelectorAll(".grid-div");
 const resizeButton = createResizeButton();
 const colourContainer = createColourContainer();
-const redPenButton = createPenColourButton("red");
+
+/// The lines below returns "TypeError: Cannot read properties of null". For some reason cannot do this and must create colourContainer variable from returning the object div from the function.
+// const colourContainer = document.querySelector(".color-container");
+// console.log(colourContainer);
+
+const redPenButton = createPenColourButton("rgba(242, 30, 30, 0.2)");
 const bluePenButton = createPenColourButton("lightblue");
 const yellowPenButton = createPenColourButton("yellow");
 const greenPenButton = createPenColourButton("lightgreen");
@@ -15,7 +20,7 @@ colourContainer.appendChild(bluePenButton);
 colourContainer.appendChild(yellowPenButton);
 colourContainer.appendChild(greenPenButton);
 
-const defaultPenColour = "red";
+const defaultPenColour = "rgba(242, 30, 30, 0.2)";
 let currentColour = defaultPenColour;
 
 const defaultNumOfSquares = 16;
@@ -104,6 +109,7 @@ function createColourContainer() {
     colourContainer.style.alignItems = "center";
     colourContainer.style.fontSize = "18px";
     gameSection.appendChild(colourContainer);
+    //This return statement is essential so that the variable returns the object div and not null. Remove comments at start to see this error.
     return colourContainer;
 }
 
@@ -113,9 +119,10 @@ function createPenColourButton(colour) {
     penColourButton.setAttribute("id", `${colour}`);
     penColourButton.style.backgroundColor = colour;
     penColourButton.style.margin = "8px";
+    penColourButton.addEventListener("click", function () {
+        gridContainer.innerHTML = "";
+        createGameGrid(currentTotalSquares, currentDimensions, colour);
+        currentColour = colour;
+    });
     return penColourButton;
-}
-
-function showRed() {
-    gridDiv.style.backgroundColor = "red";
 }
