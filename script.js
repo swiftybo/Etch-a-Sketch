@@ -5,12 +5,13 @@ const gameSection = document.querySelector(".game-section");
 const gridDiv = document.querySelectorAll(".grid-div");
 const resizeButton = createResizeButton();
 const colourContainer = createColourContainer();
+let opacity = 0.2;
 
 /// The lines below returns "TypeError: Cannot read properties of null". For some reason cannot do this and must create colourContainer variable from returning the object div from the function.
 // const colourContainer = document.querySelector(".color-container");
 // console.log(colourContainer);
 
-const redPenButton = createPenColourButton("rgba(242, 30, 30, 0.2)");
+const redPenButton = createPenColourButton("red");
 const bluePenButton = createPenColourButton("lightblue");
 const yellowPenButton = createPenColourButton("yellow");
 const greenPenButton = createPenColourButton("lightgreen");
@@ -20,7 +21,7 @@ colourContainer.appendChild(bluePenButton);
 colourContainer.appendChild(yellowPenButton);
 colourContainer.appendChild(greenPenButton);
 
-const defaultPenColour = "rgba(242, 30, 30, 0.2)";
+const defaultPenColour = "red";
 let currentColour = defaultPenColour;
 
 const defaultNumOfSquares = 16;
@@ -48,6 +49,8 @@ function createGridDiv(dimension, colour) {
     gridDiv.style.height = dimension;
     gridDiv.addEventListener("mouseover", function () {
         gridDiv.style.backgroundColor = colour;
+        opacity += 0.025;
+        gridDiv.style.opacity = opacity;
     });
     gridContainer.appendChild(gridDiv);
 }
