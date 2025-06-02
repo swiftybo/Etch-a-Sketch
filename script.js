@@ -1,15 +1,25 @@
 "use strict";
+const defaultNumOfSquares = 16;
+let currentTotalSquares = defaultNumOfSquares * defaultNumOfSquares;
+let currentDimensions = getDimensions(defaultNumOfSquares);
+
+const defaultPenColour = "red";
+let currentColour = defaultPenColour;
 
 const gridContainer = document.querySelector(".grid-container");
+const gridDivAll = document.querySelectorAll(".grid-div");
+
+createGameGrid(currentTotalSquares, currentDimensions, currentColour);
+
 const gameSection = document.querySelector(".game-section");
-const gridDiv = document.querySelectorAll(".grid-div");
+console.log(gridDivAll);
 const resizeButton = createResizeButton();
-const colourContainer = createColourContainer();
+// const colourContainer =
+createColourContainer();
 let opacity = 0.2;
 
 /// The lines below returns "TypeError: Cannot read properties of null". For some reason cannot do this and must create colourContainer variable from returning the object div from the function.
-// const colourContainer = document.querySelector(".color-container");
-// console.log(colourContainer);
+const colourContainer = document.querySelector(".colour-container");
 
 const redPenButton = createPenColourButton("red");
 const bluePenButton = createPenColourButton("lightblue");
@@ -20,14 +30,6 @@ colourContainer.appendChild(redPenButton);
 colourContainer.appendChild(bluePenButton);
 colourContainer.appendChild(yellowPenButton);
 colourContainer.appendChild(greenPenButton);
-
-const defaultPenColour = "red";
-let currentColour = defaultPenColour;
-
-const defaultNumOfSquares = 16;
-let currentTotalSquares = defaultNumOfSquares * defaultNumOfSquares;
-let currentDimensions = getDimensions(defaultNumOfSquares);
-createGameGrid(currentTotalSquares, currentDimensions, currentColour);
 
 const colour_statement = document.createElement("p");
 colour_statement.textContent =
@@ -40,27 +42,37 @@ function getDimensions(numOfSquares) {
 }
 
 // Function for creating the grid div:
-function createGridDiv(dimension, colour) {
+function createGridDiv(dimension) {
     // This is a local gridDiv variable (not accessible out of function, therefore there is a global variable for all gridDivs)
     const gridDiv = document.createElement("div");
     gridDiv.classList.add("grid-div");
     // gridDiv.classList.add(".grid-div-default:hover");
     gridDiv.style.width = dimension;
     gridDiv.style.height = dimension;
-    gridDiv.addEventListener("mouseover", function () {
-        gridDiv.style.backgroundColor = colour;
-        opacity += 0.025;
-        gridDiv.style.opacity = opacity;
-    });
+    // gridDiv.addEventListener("mouseover", function () {
+    //     gridDiv.style.backgroundColor = colour;
+    //     opacity += 0.025;
+    //     gridDiv.style.opacity = opacity;
+    // });
     gridContainer.appendChild(gridDiv);
 }
 
 // Function to create the entire game grid:
-function createGameGrid(totalsquares, measurements, penColour) {
+function createGameGrid(totalsquares, measurements) {
     for (let i = 0; i < totalsquares; i++) {
-        createGridDiv(measurements, penColour);
+        createGridDiv(measurements);
     }
+    gridDivAll.forEach((gridDiv) => {
+        console.log(gridDiv);
+        gridDiv.addEventListener("mouseover", () => {
+            gridDiv.style.backgroundColor = colour;
+            opacity += 0.025;
+            gridDiv.style.opacity = opacity;
+        });
+    });
 }
+
+console.log({ gridDivAll });
 
 // Function for creating resize button in DOM & assigning classes & event listener:
 function createResizeButton() {
@@ -113,7 +125,7 @@ function createColourContainer() {
     colourContainer.style.fontSize = "18px";
     gameSection.appendChild(colourContainer);
     //This return statement is essential so that the variable returns the object div and not null. Remove comments at start to see this error.
-    return colourContainer;
+    // return colourContainer;
 }
 
 function createPenColourButton(colour) {
