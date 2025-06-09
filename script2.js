@@ -15,7 +15,7 @@ let resizeButton;
 
 // Constants
 const gridContainerWidth = 640;
-let gridDivWidth = 640 / 16;
+let gridDivWidth = 40;
 
 // Creating html elements
 
@@ -23,6 +23,13 @@ function createGridDiv() {
     gridDiv = document.createElement("div");
     containerGrid.appendChild(gridDiv);
     gridDiv.classList.add("grid_div");
+}
+
+function createGrid(divWidth) {
+    const numSquares = (640 / divWidth) ** 2;
+    for (let i = 0; i < numSquares; i++) {
+        createGridDiv();
+    }
 }
 
 // Creating the resize button and adding functionality
@@ -43,11 +50,6 @@ resizeButton.addEventListener("click", function () {
 });
 
 // Functions
-
-for (let i = 0; i < 256; i++) {
-    createGridDiv();
-}
-
 function addInkEffect() {
     gridDivAll = document.querySelectorAll(".grid_div");
     gridDivAll.forEach(function (div) {
@@ -56,4 +58,14 @@ function addInkEffect() {
         });
     });
 }
-addInkEffect();
+
+function updateUI() {
+    // creates the game grid
+    createGrid(gridDivWidth);
+
+    // Adds the hover effect to all divs
+    addInkEffect();
+}
+
+// Calling Functions
+updateUI();
