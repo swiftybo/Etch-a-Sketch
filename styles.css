@@ -24,7 +24,9 @@ h1 {
 
 .grid-div {
     outline: solid lightskyblue;
-    outline-width: 0.5px;
+    width: 40px;
+    height: 40px;
+    outline-width: 2px;
 }
 
 .penColourButton {
