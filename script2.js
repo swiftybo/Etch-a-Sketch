@@ -23,6 +23,8 @@ function createGridDiv() {
     gridDiv = document.createElement("div");
     containerGrid.appendChild(gridDiv);
     gridDiv.classList.add("grid_div");
+    gridDiv.style.width = gridDivWidth + "px";
+    gridDiv.style.height = gridDivWidth + "px";
 }
 
 function createGrid(divWidth) {
@@ -47,6 +49,7 @@ resizeButton.addEventListener("click", function () {
         ? alert("Can you not read instructions?")
         : (gridDivWidth = 640 / newGridSize);
     console.log(gridDivWidth);
+    updateUI();
 });
 
 // Functions
@@ -60,6 +63,9 @@ function addInkEffect() {
 }
 
 function updateUI() {
+    // clear existing html elements
+    containerGrid.innerHTML = "";
+
     // creates the game grid
     createGrid(gridDivWidth);
 

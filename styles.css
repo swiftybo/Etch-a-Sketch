@@ -24,8 +24,8 @@ h1 {
 
 .grid_div {
     outline: solid lightskyblue;
-    width: 40px;
-    height: 40px;
+    /* width: 40px;
+    height: 40px; */
     outline-width: 2px;
 }
 
