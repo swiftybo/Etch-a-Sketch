@@ -7,14 +7,14 @@ h1 {
     text-align: center;
 }
 
-.game-section {
+.game_section {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
 }
 
-.grid-container {
+.grid_container {
     height: 640px;
     width: 640px;
     outline: solid lightskyblue;
@@ -22,15 +22,22 @@ h1 {
     flex-wrap: wrap;
 }
 
-.grid-div {
+.grid_div {
     outline: solid lightskyblue;
     width: 40px;
     height: 40px;
     outline-width: 2px;
 }
 
-.penColourButton {
+.penColour_Button {
     width: 28px;
     height: 28px;
     outline: solid black;
+}
+
+.resize_Button {
+    width: 120px;
+    height: 28px;
+    margin-bottom: 18px;
+    font-size: large;
 }
