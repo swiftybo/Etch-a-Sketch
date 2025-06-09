@@ -7,6 +7,7 @@ const gameSection = document.querySelector(".game_section");
 
 // containers:
 const containerGrid = document.querySelector(".grid_container");
+let containerPaint;
 
 // Game Parts:
 let gridDiv;
@@ -51,6 +52,17 @@ resizeButton.addEventListener("click", function () {
     console.log(gridDivWidth);
     updateUI();
 });
+
+// Creating paint section
+containerPaint = document.createElement("div");
+containerPaint.classList.add("paint_container");
+gameSection.appendChild(containerPaint);
+
+// Creating the paint colour buttons
+const greenButton = document.createElement("button");
+greenButton.classList.add("paint_Button");
+greenButton.style.backgroundColor = " green";
+containerPaint.appendChild(greenButton);
 
 // Functions
 function addInkEffect() {
