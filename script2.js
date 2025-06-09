@@ -13,6 +13,7 @@ let containerPaint;
 let gridDiv;
 let gridDivAll;
 let resizeButton;
+let paintColour = "yellow";
 
 // Constants
 const gridContainerWidth = 640;
@@ -59,17 +60,24 @@ containerPaint.classList.add("paint_container");
 gameSection.appendChild(containerPaint);
 
 // Creating the paint colour buttons
-const greenButton = document.createElement("button");
-greenButton.classList.add("paint_Button");
-greenButton.style.backgroundColor = " green";
-containerPaint.appendChild(greenButton);
+function createPaintButton(colour) {
+    const paintButton = document.createElement("button");
+    paintButton.classList.add("paint_Button");
+    paintButton.style.backgroundColor = colour;
+    containerPaint.appendChild(paintButton);
+
+    paintButton.addEventListener("click", function () {
+        paintColour = colour;
+        updateUI();
+    });
+}
 
 // Functions
-function addInkEffect() {
+function addInkEffect(colour) {
     gridDivAll = document.querySelectorAll(".grid_div");
     gridDivAll.forEach(function (div) {
         div.addEventListener("mouseenter", function () {
-            div.style.backgroundColor = "yellow";
+            div.style.backgroundColor = colour;
         });
     });
 }
@@ -82,8 +90,13 @@ function updateUI() {
     createGrid(gridDivWidth);
 
     // Adds the hover effect to all divs
-    addInkEffect();
+    addInkEffect(paintColour);
 }
 
 // Calling Functions
 updateUI();
+
+createPaintButton("green");
+createPaintButton("orange");
+createPaintButton("violet");
+createPaintButton("navy");
