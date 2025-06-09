@@ -78,7 +78,7 @@ function addInkEffect(colour) {
     gridDivAll.forEach(function (div) {
         let opacity = 0.2;
         div.style.opacity = opacity;
-        div.addEventListener("mouseover", function () {
+        div.addEventListener("mouseenter", function () {
             div.style.backgroundColor = colour;
             div.style.opacity = opacity;
             opacity += 0.2;
